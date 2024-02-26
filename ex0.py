@@ -26,3 +26,10 @@ with requests.get(url) as response:  # το αντικείμενο response
         print(f"The server is {server}")
     else:
         print("No server found")
+
+    cookies = response.headers.get("Set-Cookie")
+
+    if cookies:
+        print(f"The cookies is {cookies}")
+    else:
+        print("No cookie found")

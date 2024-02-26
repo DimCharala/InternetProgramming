@@ -12,7 +12,10 @@ def more(text):
                 break
 
 
-url = 'https://eclass.upatras.gr'  # προσδιορισμός του url
+url = input("Enter a URL: ")   # προσδιορισμός του url
+
+if not url.startswith("http://"):
+    url = "http://" + url
 
 with requests.get(url) as response:  # το αντικείμενο response
     #html = response.text

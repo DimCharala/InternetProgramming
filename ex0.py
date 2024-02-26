@@ -12,7 +12,7 @@ def more(text):
                 break
 
 
-url = 'http://python.org/'  # προσδιορισμός του url
+url = 'https://eclass.upatras.gr'  # προσδιορισμός του url
 
 with requests.get(url) as response:  # το αντικείμενο response
     html = response.text

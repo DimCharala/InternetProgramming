@@ -10,7 +10,10 @@ def more(text):
             if reply == 'n':
                 break
 
-url = 'http://eclass.upatras.gr/'   # προσδιορισμός του url
+url = input("Enter a URL: ")   # προσδιορισμός του url
+
+if not url.startswith("http://"):
+    url = "http://" + url
 
 with requests.get(url) as response:  # το αντικείμενο response
     #html = response.text
@@ -25,7 +28,10 @@ with requests.get(url) as response:  # το αντικείμενο response
     else:
         print("No server found")
 
-    cookies = response.cookies.get_dict()
+    cookies = response.headers.get("Set-Cookie")
 
-    print(cookies)
+    if cookies:
+        print(f"The cookies is {cookies}")
+    else:
+        print("No cookie found")
 

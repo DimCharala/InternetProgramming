@@ -21,22 +21,25 @@ with requests.get(url) as response:  # το αντικείμενο response
     #html = response.text
     #more(html)
 
-    print(f"Website headers are {url} \n , {response.headers} \n\n")
+    print(f"Website headers are {url} \n , {response.headers} \n\n")  #printing website headers
 
     server = response.headers.get('Server')
 
+    #server information
     if server:
         print(f"The server is {server}")
     else:
         print("No server found")
 
+    #cookies information
     cookies = response.headers.get("Set-Cookie")
     
     if cookies:
+        #δημιουργεί cookieJar για την ευκολότερη χρήση των cookies
         total_cookies = response.cookies
-        for cookie in total_cookies:
-            if cookie.expires:
-                expiresDate = datetime.datetime.fromtimestamp(cookie.expires)
+        for cookie in total_cookies: #για κάθε cookie
+            if cookie.expires:   #έλεγχος ύπαρξης τιμής expires
+                expiresDate = datetime.datetime.fromtimestamp(cookie.expires) #date format
                 print(f"Cookie name: {cookie.name}, Cookie expires: {expiresDate}")
             else:
                 print(f"Cookie name: {cookie.name}, Cookie expires: Not found")

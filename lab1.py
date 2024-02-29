@@ -1,5 +1,5 @@
 import requests  # εισαγωγή της βιβλιοθήκης
-
+import datetime
 
 def more(text):
     count = 0
@@ -31,8 +31,14 @@ with requests.get(url) as response:  # το αντικείμενο response
         print("No server found")
 
     cookies = response.headers.get("Set-Cookie")
-
+    
     if cookies:
-        print(f"The cookies is {cookies}")
+        total_cookies = response.cookies
+        for cookie in total_cookies:
+            if cookie.expires:
+                expiresDate = datetime.datetime.fromtimestamp(cookie.expires)
+                print(f"Cookie name: {cookie.name}, Cookie expires: {expiresDate}")
+            else:
+                print(f"Cookie name: {cookie.name}, Cookie expires: Not found")
     else:
         print("No cookie found")
